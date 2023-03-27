@@ -17,12 +17,7 @@ int print_str(va_list args)
 	str = va_arg(args, char *);
 	if (str == NULL)
 		return (-1);
-
-	while (str[i])
-	{
-		index = write(1, &str[i], 1);
-		i = i + 1;
-	}
-
+	for (i = 0; str[i] != '\0'; i++)
+		index += _putchar(str[i]);
 	return (index);
 }
