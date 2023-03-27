@@ -10,9 +10,11 @@ int (*specifier(char *format))(va_list)
 {
 	int i;
 
-	f_specifier spec[4] = {
+	f_specifier spec[] = {
 		{"c", print_char},
 		{"s", print_str},
+		{"d", print_int},
+		{"i", print_int},
 		{"%", print_percent},
 		{NULL, NULL},
 	};
