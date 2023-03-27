@@ -14,7 +14,7 @@ int (*specifier(char *format))(va_list)
 		{"c", print_char},
 		{"s", print_str},
 		{"%", print_percent},
-		{NULL, NULL}
+		{NULL, NULL},
 	};
 
 	for (i = 0; spec[i].s != NULL; i++)
