@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdarg.h>
 
 /**
  * print_int - prints a given integer from variadic parameters
@@ -7,7 +6,6 @@
  *
  * Return: number of characters printed on Success
  */
-
 int print_int(va_list args)
 {
 	int i = 0;
@@ -16,6 +14,19 @@ int print_int(va_list args)
 	int print_arr[10];
 
 	number = va_arg(args, int);
+
+	if (number == 0)
+	{
+		_putchar('0');
+		return (1);
+	}
+
+	if (number < 0)
+	{
+		_putchar('-');
+		count++;
+		number = -number;
+	}
 
 	while (number != 0)
 	{
@@ -26,10 +37,11 @@ int print_int(va_list args)
 		i++;
 	}
 
-	for (i = 0; i >= 0; i--)
+	for (; i >= 0; i--)
 	{
 		_putchar('0' + print_arr[i]);
 		count++;
 	}
+
 	return (count);
 }
