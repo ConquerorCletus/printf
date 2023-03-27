@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stddef.h>
-#include <unstd.h>
+#include <unistd.h>
 
 /**
  * struct specifiers - a structure for specifier
@@ -20,6 +20,9 @@ typedef struct specifiers
 
 int _printf(const char *format, ...);
 int _putchar(char);
-int (*specifier(const char *format))(va_list);
+int print_char(va_list args);
+int print_str(va_list args);
+int print_percent(va_list args);
+int (*specifier(char *s))(va_list);
 
 #endif

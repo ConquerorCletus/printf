@@ -6,8 +6,7 @@
  * NULL, if specifier not valid
  * Date: 26-03-2023
  */
-
-int (*specifier(const char *format))(va_list)
+int (*specifier(char *format))(va_list)
 {
 	int i;
 
@@ -20,7 +19,7 @@ int (*specifier(const char *format))(va_list)
 
 	for (i = 0; spec[i].s != NULL; i++)
 	{
-		if (*(spec[i].s == *format))
+		if (*spec[i].s == *format)
 			return (spec[i].f);
 	}
 	return (NULL);
