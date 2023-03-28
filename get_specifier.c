@@ -26,4 +26,3 @@ int (*specifier(char *format))(va_list)
 	}
 	return (NULL);
 }
-
