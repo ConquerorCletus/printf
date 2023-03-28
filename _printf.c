@@ -1,51 +1,50 @@
 #include "main.h"
+#include <limits.h>
+#include <stdio.h>
 
 /**
- * _printf - prints a string in a formatted way
- * @format: string to print (char *)
- * @...: variadic parameters (unknown)
- * Date: 26-3-2023
- * Return: number of characters printed
+ * _printf - produces output according to a format
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the get_print() function that will
+ * determine which printing function to call depending on the conversion
+ * specifiers contained into fmt
+ * Return: length of the formatted output string
  */
 int _printf(const char *format, ...)
 {
-	va_list arg;
-	int i, count = 0, value;
-	int (*f)(va_list);
-	char s[2];
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-	if (format == NULL)
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-
-	va_start(arg, format);
-
-	for (i = 0; format[i] != '\0'; i++)
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		if (format[i] != '%')
+		if (*p == '%')
 		{
-			_putchar(format[i]);
-			count++;
-		}
-		else
-		{
-			s[0] = format[i + 1];
-			s[1] = '\0';
-			f = specifier(s);
-			if (f != NULL)
+			p++;
+			if (*p == '%')
 			{
-				value = f(arg);
-				count += value;
-				i++;
+				count += _putchar('%');
+				continue;
 			}
-			else
-			{
-				_putchar(format[i]);
-				count++;
-			}
-		}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-
-	va_end(arg);
-
+	_putchar(-1);
+	va_end(arguments);
 	return (count);
+
 }
