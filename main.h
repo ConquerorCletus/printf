@@ -26,5 +26,7 @@ int print_percent(va_list args);
 int (*specifier(char *s))(va_list);
 int print_int(va_list args);
 int print_dec(va_list args);
+int print_unsigned(va_list args);
+
 
 #endif
