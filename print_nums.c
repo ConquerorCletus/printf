@@ -22,13 +22,6 @@ int print_int(va_list l, flags_t *f)
 	return (res);
 }
 
-/**
- * print_unsigned - prints an unsigned integer
- * @l: va_list of arguments from _printf
- * @f: pointer to the struct flags determining
- * if a flag is passed to _printf
- * Return: number of char printed
- */
  /*
   * int print_unsigned(va_list l, flags_t *f)
   * {
